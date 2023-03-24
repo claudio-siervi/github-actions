@@ -5,6 +5,10 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Print Hello
-        run: echo "Hello World"
+        run: |
+          echo "Hello World"
+          echo "Show me from behind the wall"
       - name: Print project main folder path
-        run: echo pwd
+        run: pwd
+      - name: Print processor speed
+        run: lscpu
