@@ -10,5 +10,5 @@ jobs:
           echo "Show me from behind the wall"
       - name: Print project main folder path
         run: pwd
-      - name: Print processor speed
-        run: lscpu
+      - name: Print Mac OS X processor speed
+        run: system_profiler | grep Processor
