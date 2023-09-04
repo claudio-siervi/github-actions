@@ -16,21 +16,22 @@ name: Checking outputson:
             echo "my_output=false" >> "$GITHUB_OUTPUT"
             echo "That is wrong"
           fi
-          echo ""      - name: 'print'
+          echo ""      
+      - name: 'print'
         run: echo "${{ steps.set_value.outputs.my_output }}"  
-  job2:
-    runs-on: ubuntu-latest    
-    steps:
-      # - name: 'just triggers'
-      #   run: echo "nohing"      - name: Triggered only if value is true (using if)
-        if: ${{ needs.job1.outputs.my_output == 'true' }}
-        run: echo "The condition was met!"      - name: Triggered only if value is true (using if)
-        if: ${{ needs.job1.outputs.my_output == 'true' }}
-        run: echo "The condition was met again!"      # - name: Triggered only if value is true (not using if)
-      #   run: echo "The condition was met!"      # - name: Triggered by previous if (not using if)
-      #   run: echo "This is weird!"      - name: Triggered only if value is false (using if)
-        if: ${{ needs.job1.outputs.my_output == 'false' }}
-        run: echo "The condition was not met!"      # - name: Triggered only if value is false (not using if)
-      #   run: echo "The condition was met!"      # - name: Triggered by previous if (not using if)
-      #   run: echo "This is weird!"
+  # job2:
+  #   runs-on: ubuntu-latest    
+  #   steps:
+  #     # - name: 'just triggers'
+  #     #   run: echo "nohing"      - name: Triggered only if value is true (using if)
+  #       if: ${{ needs.job1.outputs.my_output == 'true' }}
+  #       run: echo "The condition was met!"      - name: Triggered only if value is true (using if)
+  #       if: ${{ needs.job1.outputs.my_output == 'true' }}
+  #       run: echo "The condition was met again!"      # - name: Triggered only if value is true (not using if)
+  #     #   run: echo "The condition was met!"      # - name: Triggered by previous if (not using if)
+  #     #   run: echo "This is weird!"      - name: Triggered only if value is false (using if)
+  #       if: ${{ needs.job1.outputs.my_output == 'false' }}
+  #       run: echo "The condition was not met!"      # - name: Triggered only if value is false (not using if)
+  #     #   run: echo "The condition was met!"      # - name: Triggered by previous if (not using if)
+  #     #   run: echo "This is weird!"
 
