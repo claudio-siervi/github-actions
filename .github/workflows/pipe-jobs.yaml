@@ -6,17 +6,17 @@ jobs:
     steps:
       - name: Set some value
         id: set_value
-        run: echo "Set some value"
-        # run: |
-        #   if [ 1 -gt 0 ]
-        #   then
-        #     echo "my_output=true" >> "$GITHUB_OUTPUT"
-        #     echo "That is correct"
-        #   else
-        #     echo "my_output=false" >> "$GITHUB_OUTPUT"
-        #     echo "That is wrong"
-        #   fi
-        #   echo ""      
+        # run: echo "Set some value"
+        run: |
+          if [ 1 -gt 0 ]
+          then
+            echo "my_output=true" >> "$GITHUB_OUTPUT"
+            echo "That is correct"
+          else
+            echo "my_output=false" >> "$GITHUB_OUTPUT"
+            echo "That is wrong"
+          fi
+          echo ""      
       - name: 'print'
         run: echo "print"
   # job2:
