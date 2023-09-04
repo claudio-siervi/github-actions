@@ -1,5 +1,6 @@
-name: Checking outputson:
-  workflow_dispatch:jobs:
+name: Workflow Seq Jpbs
+on: workflow_dispatch
+jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
