@@ -1,6 +1,8 @@
 name: Workflow Job1 depends-on Job2
 on: workflow_dispatch
+
 jobs:
+  
   job1:
     runs-on: ubuntu-latest
     outputs:
@@ -19,26 +21,22 @@ jobs:
             echo "That is wrong"
           fi
           echo ""      
-      - name: 'print'
+      - name: 'print job1 outputs'
         run: echo ${{ steps.job1.outputs.my_output }}
+  
   job2:
     runs-on: ubuntu-latest  
     needs: job1  
     steps:
+      - name: 'print job1 outputs'
+        run: echo ${{ needs.job1.outputs.my_output }}
+
       - name: Job 2
         id: job2
-        run: echo "That is correct"
-      - name: 'print'
-        run: echo ${{ needs.job1.outputs.my_output }}
-      #   run: echo "nohing"      - name: Triggered only if value is true (using if)
-      #   if: ${{ steps.job1.outputs.my_output == 'true' }}
-      #   run: echo "The condition was met!"      - name: Triggered only if value is true (using if)
-      #   if: ${{ needs.job1.outputs.my_output == 'true' }}
-      #   run: echo "The condition was met again!"      # - name: Triggered only if value is true (not using if)
-      # #   run: echo "The condition was met!"      # - name: Triggered by previous if (not using if)
-      # #   run: echo "This is weird!"      - name: Triggered only if value is false (using if)
-      #   if: ${{ needs.job1.outputs.my_output == 'false' }}
-      #   run: echo "The condition was not met!"      # - name: Triggered only if value is false (not using if)
-      # #   run: echo "The condition was met!"      # - name: Triggered by previous if (not using if)
-      # #   run: echo "This is weird!"
-
+        run: |
+          echo "That is correct"
+          if [[${{ needs.job1.outputs.my_output }} ]]; then
+          echo "The condition was met!"   
+          else
+            echo "The condition was not met!" 
+          fi
