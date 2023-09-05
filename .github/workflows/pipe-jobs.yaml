@@ -1,8 +1,10 @@
-name: Workflow Seq Jpbs
+name: Workflow Job1 depends-on Job2
 on: workflow_dispatch
 jobs:
   job1:
-    runs-on: ubuntu-latest   
+    runs-on: ubuntu-latest
+    outputs:
+      my_output: ${{ steps.job1.outputs.my_output }}
     steps:
       - name: Job 1
         id: job1
