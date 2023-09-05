@@ -25,7 +25,9 @@ jobs:
     steps:
       - name: Job 2
         id: job2
-        run: echo ${{ steps.job1.outputs.my_output }}
+        run: echo "That is correct"
+      - name: 'print'
+        run: echo ${{ needs.job1.outputs.my_output }}
       #   run: echo "nohing"      - name: Triggered only if value is true (using if)
       #   if: ${{ steps.job1.outputs.my_output == 'true' }}
       #   run: echo "The condition was met!"      - name: Triggered only if value is true (using if)
