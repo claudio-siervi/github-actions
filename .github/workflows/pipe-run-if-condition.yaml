@@ -32,12 +32,17 @@ jobs:
     steps:
       - name: Triggered only if value is true (using if)
         if: ${{ needs.job1.outputs.result.my_output }}
-        run: echo "The condition was met!"
+        run: |
+            echo "The condition was met!" 
+            ${{ needs.job1.outputs.result.my_output }}
 
       - name: Triggered only if value is true (using if)
         if: ${{ needs.job1.outputs.result.my_output  == 'true' }}  
-        run: echo "The condition was met again!"
-
+        run: |
+            echo "The condition was met!" 
+            ${{ needs.job1.outputs.result.my_output }}
       - name: Triggered only if value is false (using if)
         if: ${{ needs.job1.outputs.result.my_output }} == 'false'
-        run: echo "The condition was not met!"
+        run: |
+            echo "The condition was not met!" 
+            ${{ needs.job1.outputs.result.my_output }}
