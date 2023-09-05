@@ -1,0 +1,58 @@
+name: Checking outputs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      result: $ {{ steps.set_value.outputs.my_output }}
+
+    steps:
+      - name: Set some value
+        id: set_value
+        run: |
+          if [ 1 -gt 0 ]
+          then
+            echo "my_output=true" >> "$GITHUB_OUTPUT"
+            echo "That is correct"
+          else
+            echo "my_output=false" >> "$GITHUB_OUTPUT"
+            echo "That is wrong"
+          fi
+          echo ""
+
+      - name: 'print'
+        run: echo "${{ steps.set_value.outputs.my_output }}"
+
+  job2:
+    runs-on: ubuntu-latest
+
+    steps:
+      # - name: 'just triggers'
+      #   run: echo "nohing"
+
+      - name: Triggered only if value is true (using if)
+        if: ${{ needs.job1.outputs.my_output == 'true' }}
+        run: echo "The condition was met!"
+
+      - name: Triggered only if value is true (using if)
+        if: ${{ needs.job1.outputs.my_output == 'true' }}
+        run: echo "The condition was met again!"
+      
+      # - name: Triggered only if value is true (not using if)
+      #   run: echo "The condition was met!"
+
+      # - name: Triggered by previous if (not using if)
+      #   run: echo "This is weird!"
+      
+      - name: Triggered only if value is false (using if)
+        if: ${{ needs.job1.outputs.my_output == 'false' }}
+        run: echo "The condition was not met!"
+
+      # - name: Triggered only if value is false (not using if)
+      #   run: echo "The condition was met!"
+
+      # - name: Triggered by previous if (not using if)
+      #   run: echo "This is weird!"
