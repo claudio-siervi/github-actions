@@ -35,7 +35,7 @@ jobs:
         id: job2
         run: |
           echo "That is correct"
-          if [[${{ needs.job1.outputs.my_output }} ]]; then
+          if ${{ needs.job1.outputs.my_output }}; then
           echo "The condition was met!"   
           else
             echo "The condition was not met!" 
