@@ -30,29 +30,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: job1
     steps:
-      # - name: 'just triggers'
-      #   run: echo "nohing"
-
       - name: Triggered only if value is true (using if)
-        if: ${{ needs.job1.outputs.my_output == 'true' }}
+        if: ${{ needs.job1.outputs.my_output }}
         run: echo "The condition was met!"
 
       - name: Triggered only if value is true (using if)
-        if: ${{ needs.job1.outputs.my_output == 'true' }}
+        if: ${{ needs.job1.outputs.my_output  }}  == 'true'
         run: echo "The condition was met again!"
-      
-      # - name: Triggered only if value is true (not using if)
-      #   run: echo "The condition was met!"
 
-      # - name: Triggered by previous if (not using if)
-      #   run: echo "This is weird!"
-      
       - name: Triggered only if value is false (using if)
-        if: ${{ needs.job1.outputs.my_output == 'false' }}
+        if: ${{ needs.job1.outputs.my_output }} == 'false'
         run: echo "The condition was not met!"
-
-      # - name: Triggered only if value is false (not using if)
-      #   run: echo "The condition was met!"
-
-      # - name: Triggered by previous if (not using if)
-      #   run: echo "This is weird!"
