@@ -7,7 +7,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
-      result: $ {{ steps.set_value.outputs.my_output }}
+      my_output: $ {{ steps.set_value.outputs.my_output }}
 
     steps:
       - name: Set some value
@@ -31,18 +31,18 @@ jobs:
     needs: job1
     steps:
       - name: Triggered only if value is true (using if)
-        if: ${{ needs.job1.outputs.result }}
+        if: ${{ needs.job1.outputs.my_output }}
         run: |
             echo "The condition 1 was met!" 
-            echo ${{ needs.job1.outputs.result }}
+            echo ${{ needs.job1.outputs.my_output }}
 
       - name: Triggered only if value is true (using if ==)
-        if: ${{ needs.job1.outputs.result  == 'true' }}
+        if: ${{ needs.job1.outputs.my_output  == 'true' }}
         run: |
             echo "The condition 2 was met!" 
-            echo ${{ needs.job1.outputs.result }}
+            echo ${{ needs.job1.outputs.my_output }}
       - name: Triggered only if value is false (using if ==)
-        if: ${{ needs.job1.outputs.result == 'false' }}
+        if: ${{ needs.job1.outputs.my_output == 'false' }}
         run: |
             echo "The condition was not met!" 
-            echo ${{ needs.job1.outputs.result }}
+            echo ${{ needs.job1.outputs.my_output }}
