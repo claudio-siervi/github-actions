@@ -31,18 +31,18 @@ jobs:
     needs: job1
     steps:
       - name: Triggered only if value is true (using if)
-        if: ${{ needs.job1.outputs.my_output }}
+        if: ${{ needs.job1.outputs.result }}
         run: |
             echo "The condition was met!" 
-            echo ${{ needs.job1.outputs.my_output }}
+            echo ${{ needs.job1.outputs.result }}
 
       - name: Triggered only if value is true (using if)
-        if: needs.job1.outputs.my_output  == 'true'
+        if: needs.job1.outputs.result  == 'true'
         run: |
             echo "The condition was met!" 
             echo ${{ needs.job1.result.my_output }}
       - name: Triggered only if value is false (using if)
-        if: ${{ needs.job1.outputs.my_output }} == 'false'
+        if: ${{ needs.job1.outputs.result }} == 'false'
         run: |
             echo "The condition was not met!" 
             echo ${{ needs.job1.outputs.my_output }}
