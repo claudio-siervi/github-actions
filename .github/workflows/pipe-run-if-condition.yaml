@@ -24,7 +24,7 @@ jobs:
           echo ""
 
       - name: 'print'
-        run: echo "${{ steps.set_value.outputs.my_output }}"
+        run: echo "${{ steps.set_value.outputs.result }}"
 
   job2:
     runs-on: ubuntu-latest
