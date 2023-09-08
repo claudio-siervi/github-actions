@@ -7,7 +7,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
-      my_output: $ {{ steps.set_value.outputs.my_output }}
+      my_output: $ {{ my_output }}
 
     steps:
       - name: Set some value
