@@ -7,11 +7,11 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
-      my_output: ${{ steps.job1.outputs.my_output }}
+      my_output: ${{ steps.set_value.outputs.my_output }}
 
     steps:
       - name: Set some value
-        id: job1
+        id: set_value
         run: |
           if [ 1 -gt 0 ]
           then
@@ -24,7 +24,7 @@ jobs:
           echo ""
 
       - name: 'print'
-        run: echo "${{ steps.job1.outputs.my_output }}"
+        run: echo "${{ steps.set_value.outputs.my_output }}"
 
   job2:
     runs-on: ubuntu-latest
